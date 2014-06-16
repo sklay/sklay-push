@@ -6,12 +6,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 import org.apache.mina.core.session.IoSession;
+import org.springframework.stereotype.Component;
 
 /**
  * 自带默认 session管理实现， 各位可以自行实现 AbstractSessionManager接口来实现自己的 session管理
  * 
- * @author farsunset (3979434@qq.com)
+ * @author 1988fuyu@163.com
  */
+@Component
 public class DefaultSessionManager implements SessionManager
 {
     

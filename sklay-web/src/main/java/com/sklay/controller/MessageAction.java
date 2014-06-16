@@ -18,7 +18,7 @@ import com.sklay.chat.push.SystemMessagePusher;
 
 /**
  * 
- * @author farsunset (3979434@qq.com)
+ * @author 1988fuyu@163.com
  */
 @Controller
 @RequestMapping("/cgi")
@@ -29,10 +29,10 @@ public class MessageAction
     SystemMessagePusher systemMessagePusher;
     
     /**
-     * ¹ØÓÚhttp²ÎÊý»ñÈ¡£¬ struts2 µÄÄ£ÐÍÇý¶¯ ±ÈÈç http ²ÎÊý sender=xiaomao&receiver=xiaogou struts×Ô¶¯»á½«²ÎÊýµÄÖµ
-     * ´æÈëgetModel()·µ»ØµÄ¶ÔÏóµÄ¶ÔÓ¦ÊôÐÔÖÐ£¬¼´xiaomao»á´æÈëmessage.senderÊôÐÔ,xiaogou»á´æÈëmessage.receiverÊôÐÔ
-     * Ê¡È¥ÁËrequest.getParameter("sender")·½Ê½»ñÈ¡²ÎÊý£¬£¬Èç¹û²ÎÊýÃûÔÚgetModel()·µ»ØµÄ¶ÔÏóÖÐ²»´æÔÚ£¬ÔòÐèÒªÓÃrequest.getParameter()»ñÈ¡ ÆäËûÏà¹Ø*Action.javaÖÐ
-     * Í¬Àí£¬ÕâÀï×öÍ³Ò»ËµÃ÷!
+     * ï¿½ï¿½ï¿½ï¿½httpï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ struts2 ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ http ï¿½ï¿½ï¿½ï¿½ sender=xiaomao&receiver=xiaogou strutsï¿½Ô¶ï¿½ï¿½á½«ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+     * ï¿½ï¿½ï¿½ï¿½getModel()ï¿½ï¿½ï¿½ØµÄ¶ï¿½ï¿½ï¿½Ä¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½xiaomaoï¿½ï¿½ï¿½ï¿½ï¿½message.senderï¿½ï¿½ï¿½ï¿½,xiaogouï¿½ï¿½ï¿½ï¿½ï¿½message.receiverï¿½ï¿½ï¿½ï¿½
+     * Ê¡È¥ï¿½ï¿½request.getParameter("sender")ï¿½ï¿½Ê½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½getModel()ï¿½ï¿½ï¿½ØµÄ¶ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½request.getParameter()ï¿½ï¿½È¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*Action.javaï¿½ï¿½
+     * Í¬ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³Ò»Ëµï¿½ï¿½!
      */
     @RequestMapping("/send")
     @ResponseBody
@@ -50,7 +50,7 @@ public class MessageAction
             
             checkParams(message);
             
-            // Ïò¿Í»§¶Ë ·¢ËÍÏûÏ¢
+            // ï¿½ï¿½Í»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
             systemMessagePusher.pushMessageToUser(message);
             
             data.put("id", message.getMid());
@@ -69,7 +69,7 @@ public class MessageAction
     }
     
     /**
-     * ÎÄ¼þÓÉ¿Í»§¶Ë·¢Íù°¢ÀïÔÆ OSS ´æ´¢
+     * ï¿½Ä¼ï¿½ï¿½É¿Í»ï¿½ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ OSS ï¿½æ´¢
      * 
      * @param messageServiceImpl
      */
@@ -79,7 +79,7 @@ public class MessageAction
      * if(pr.getFiles("file")!=null) { File file = pr.getFiles("file")[0];
      * 
      * String fileType = request.getParameter("fileType"); String dir = dirMap.get(fileType);
-     * if(StringUtils.isEmpty(dir)) { throw new IllegalArgumentException("fileType:" +fileType+" Î´¶¨Òå" );
+     * if(StringUtils.isEmpty(dir)) { throw new IllegalArgumentException("fileType:" +fileType+" Î´ï¿½ï¿½ï¿½ï¿½" );
      * 
      * } String path = request.getSession().getServletContext().getRealPath(dir); String
      * uuid=UUID.randomUUID().toString().replaceAll("-", ""); File des = new File(path+"/"+uuid);
@@ -93,13 +93,13 @@ public class MessageAction
     {
         if (null == message)
         {
-            throw new IllegalArgumentException("message ²»ÄÜÎª¿Õ!");
+            throw new IllegalArgumentException("message ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½!");
             
         }
         
         if (StringUtils.isEmpty(message.getReceiver()))
         {
-            throw new IllegalArgumentException("receiver ²»ÄÜÎª¿Õ!");
+            throw new IllegalArgumentException("receiver ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½!");
             
         }
     }

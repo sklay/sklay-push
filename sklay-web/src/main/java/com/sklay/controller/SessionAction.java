@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.mina.core.session.IoSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +28,9 @@ public class SessionAction
     @RequestMapping("/manage")
     public String list(final HttpServletRequest request)
     {
+        IoSession session = null ;
+        
+        defaultSessionManager.addSession("admin", session) ;
         request.setAttribute("sessionList", defaultSessionManager.getSessions());
         
         return "session.manage";

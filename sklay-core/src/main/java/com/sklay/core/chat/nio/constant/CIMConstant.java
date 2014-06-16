@@ -32,7 +32,7 @@ public   interface  CIMConstant  {
 	
 	/**
 	 * 对应ichat 中 spring-cim.xml  > bean:mainIoHandler >handlers
-	 * 为 服务端处理对应的handlers，应该继承与com.farsunset.cim.nio.handle.AbstractHandler
+	 * 为 服务端处理对应的handlers，应该继承与com.sklay.core.chat.nio.handle.AbstractHandler
 	 * @author xiajun
 	 *
 	 */

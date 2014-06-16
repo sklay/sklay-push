@@ -13,7 +13,7 @@ import com.sklay.core.chat.nio.session.DefaultSessionManager;
 /**
  * 消息发送实现类
  * 
- * @author farsunset (3979434@qq.com)
+ * @author 1988fuyu@163.com
  */
 @Component
 public class DefaultMessagePusher implements CIMMessagePusher
@@ -44,15 +44,15 @@ public class DefaultMessagePusher implements CIMMessagePusher
         if (session != null && session.isConnected())
         {
             
-            /*
-             * //如果用户标示了DeviceToken 且 需要后台推送（Pushable=1） 说明这是ios设备需要使用anps发送
-             * 
-             * if(StringUtil.isNotEmpty(session.getDeviceToken())&&session.getPushable()==User.PUSHABLE) { try {
-             * deliverByANPS(msg,session.getDeviceToken()); msg.setStatus(Message.STATUS_SEND); } catch (Exception e) {
-             * // TODO Auto-generated catch block e.printStackTrace(); msg.setStatus(Message.STATUS_NOT_SEND); } }else {
-             * 
-             * //推送消息 session.deliver(MessageUtil.transform(msg)); }
-             */
+            
+              //如果用户标示了DeviceToken 且 需要后台推送（Pushable=1） 说明这是ios设备需要使用anps发送
+             
+//             if(StringUtil.isNotEmpty(session.getDeviceToken())&&session.getPushable()==User.PUSHABLE) { try {
+//             deliverByANPS(msg,session.getDeviceToken()); msg.setStatus(Message.STATUS_SEND); } catch (Exception e) {
+             // TODO Auto-generated catch block e.printStackTrace(); msg.setStatus(Message.STATUS_NOT_SEND); } }else {
+             
+             //推送消息 session.deliver(MessageUtil.transform(msg)); }
+            
             
             // 推送消息
             session.write(msg);

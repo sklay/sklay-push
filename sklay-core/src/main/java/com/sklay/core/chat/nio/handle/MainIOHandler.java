@@ -14,7 +14,7 @@ import com.sklay.core.chat.nio.mutual.SentBody;
 /**
  *  
  * 客户端请求的入口，所有请求都首先经过它分发处理
- * @author farsunset (3979434@qq.com)
+ * @author 1988fuyu@163.com
  */
 public class MainIOHandler extends IoHandlerAdapter {
 

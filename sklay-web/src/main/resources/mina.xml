@@ -40,7 +40,6 @@
 				<entry key="sessionClosedHander">
 					<bean class="com.sklay.chat.handler.SessionClosedHandler" />
 				</entry>
-
 			</map>
 		</property>
 	</bean>
@@ -69,9 +68,7 @@
 		</property>
 	</bean>
 
-	<bean id="sessionConfig" factory-bean="serverAcceptor"
-		factory-method="getSessionConfig">
-
+	<bean id="sessionConfig" factory-bean="serverAcceptor" factory-method="getSessionConfig">
 		<property name="bothIdleTime" value="180" />
 		<property name="keepAlive" value="true" />
 		<property name="tcpNoDelay" value="true" />
@@ -85,6 +82,7 @@
 		<property name="reuseAddress" value="true" />
 	</bean>
 
-	<!-- 这里可以自行实现com.farsunset.cim.nio.session.SessionManager接口，实现自己的session管理器 -->
-	<bean id="defaultSessionManager" class="com.sklay.core.chat.nio.session.DefaultSessionManager" />
+	<!-- 这里可以自行实现com.farsunset.cim.nio.session.SessionManager接口，实现自己的session管理器 
+		<bean id="defaultSessionManager" class="com.sklay.core.chat.nio.session.DefaultSessionManager" 
+		/> -->
 </beans>

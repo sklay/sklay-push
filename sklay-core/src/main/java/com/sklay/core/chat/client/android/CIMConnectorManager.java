@@ -39,29 +39,29 @@ class CIMConnectorManager  {
 	static CIMConnectorManager manager;
 
 	// 消息广播action
-	public static final String ACTION_MESSAGE_RECEIVED = "com.farsunset.cim.MESSAGE_RECEIVED";
+	public static final String ACTION_MESSAGE_RECEIVED = "com.sklay.push.MESSAGE_RECEIVED";
 	
 	// 发送sendbody失败广播
-	public static final String ACTION_SENT_FAILED = "com.farsunset.cim.SENT_FAILED";
+	public static final String ACTION_SENT_FAILED = "com.sklay.push.SENT_FAILED";
 	
 	// 发送sendbody成功广播
-	public static final String ACTION_SENT_SUCCESS = "com.farsunset.cim.SENT_SUCCESS";
+	public static final String ACTION_SENT_SUCCESS = "com.sklay.push.SENT_SUCCESS";
 	// 链接意外关闭广播
-	public static final String ACTION_CONNECTION_CLOSED = "com.farsunset.cim.CONNECTION_CLOSED";
+	public static final String ACTION_CONNECTION_CLOSED = "com.sklay.push.CONNECTION_CLOSED";
 	// 链接失败广播
-	public static final String ACTION_CONNECTION_FAILED = "com.farsunset.cim.CONNECTION_FAILED";
+	public static final String ACTION_CONNECTION_FAILED = "com.sklay.push.CONNECTION_FAILED";
 	// 链接成功广播
-	public static final String ACTION_CONNECTION_SUCCESS = "com.farsunset.cim.CONNECTION_SUCCESS";
+	public static final String ACTION_CONNECTION_SUCCESS = "com.sklay.push.CONNECTION_SUCCESS";
 	// 发送sendbody成功后获得replaybody回应广播
-	public static final String ACTION_REPLY_RECEIVED = "com.farsunset.cim.REPLY_RECEIVED";
+	public static final String ACTION_REPLY_RECEIVED = "com.sklay.push.REPLY_RECEIVED";
 	// 网络变化广播
 	public static final String ACTION_NETWORK_CHANGED = "android.net.conn.CONNECTIVITY_CHANGE";
 	
 	// 未知异常
-	public static final String ACTION_UNCAUGHT_EXCEPTION = "com.farsunset.cim.UNCAUGHT_EXCEPTION";
+	public static final String ACTION_UNCAUGHT_EXCEPTION = "com.sklay.push.UNCAUGHT_EXCEPTION";
 
 	// CIM连接状态
-	public static final String ACTION_CONNECTION_STATUS = "com.farsunset.cim.CONNECTION_STATUS";
+	public static final String ACTION_CONNECTION_STATUS = "com.sklay.push.CONNECTION_STATUS";
 
 
 	private ExecutorService executor;

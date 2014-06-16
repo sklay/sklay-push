@@ -9,7 +9,7 @@ import com.sklay.core.chat.nio.session.DefaultSessionManager;
 
 /**
  * 
- * @author farsunset (3979434@qq.com)
+ * @author 1988fuyu@163.com
  */
 @Component
 public class SystemMessagePusher extends DefaultMessagePusher
