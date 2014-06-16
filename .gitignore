@@ -12,3 +12,7 @@
 /sklay-web/.settings
 /sklay-web/*.classpath
 /sklay-web/*.project
+/sklay-push-android/.settings
+/sklay-push-android/bin
+/sklay-push-android/*.classpath
+/sklay-push-android/*.project
