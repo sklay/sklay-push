@@ -1,0 +1,14 @@
+/.settings
+/*.project
+/sklay-web/target
+/sklay-chat/target
+/sklay-chat/.settings
+/sklay-chat/*.classpath
+/sklay-chat/*.project
+/sklay-core/target
+/sklay-core/.settings
+/sklay-core/*.classpath
+/sklay-core/*.project
+/sklay-web/.settings
+/sklay-web/*.classpath
+/sklay-web/*.project
