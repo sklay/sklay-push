@@ -60,15 +60,24 @@
             android:name="com.sklay.chat.receiver.CustomCIMMessageReceiver"
             android:exported="false" >
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" /> <!-- 网络变化广播 -->
-                <action android:name="com.sklay.push.MESSAGE_RECEIVED" /> <!-- 消息广播action -->
-                <action android:name="com.sklay.push.SENT_FAILED" /> <!-- 发送sendbody失败广播 -->
-                <action android:name="com.sklay.push.SENT_SUCCESS" /> <!-- 发送sendbody成功广播 -->
-                <action android:name="com.sklay.push.CONNECTION_CLOSED" /> <!-- 链接意外关闭广播 -->
-                <action android:name="com.sklay.push.CONNECTION_FAILED" /> <!-- 链接失败广播 -->
-                <action android:name="com.sklay.push.CONNECTION_SUCCESS" /> <!-- 链接成功广播 -->
-                <action android:name="com.sklay.push.REPLY_RECEIVED" /> <!-- 发送sendbody成功后获得replaybody回应广播 -->
-                <action android:name="com.sklay.push.CONNECTION_STATUS" /> <!-- 获取到与服务端连接状态广播 -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+ <!-- 网络变化广播 -->
+                <action android:name="com.sklay.push.MESSAGE_RECEIVED" />
+ <!-- 消息广播action -->
+                <action android:name="com.sklay.push.SENT_FAILED" />
+ <!-- 发送sendbody失败广播 -->
+                <action android:name="com.sklay.push.SENT_SUCCESS" />
+ <!-- 发送sendbody成功广播 -->
+                <action android:name="com.sklay.push.CONNECTION_CLOSED" />
+ <!-- 链接意外关闭广播 -->
+                <action android:name="com.sklay.push.CONNECTION_FAILED" />
+ <!-- 链接失败广播 -->
+                <action android:name="com.sklay.push.CONNECTION_SUCCESS" />
+ <!-- 链接成功广播 -->
+                <action android:name="com.sklay.push.REPLY_RECEIVED" />
+ <!-- 发送sendbody成功后获得replaybody回应广播 -->
+                <action android:name="com.sklay.push.CONNECTION_STATUS" />
+ <!-- 获取到与服务端连接状态广播 -->
             </intent-filter>
         </receiver>
     </application>

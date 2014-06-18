@@ -5,9 +5,8 @@ package com.sklay.chat.app;
  * @version 1.0
  */
 public interface Constant {
-
 	// 服务端web地址
-	public static final String SERVER_URL = "http://192.168.1.166/ichat";
+	public static final String SERVER_URL = "http://192.168.1.166/push";
 	// 服务端IP地址
 	public static final String CIM_SERVER_HOST = "192.168.1.166";
 
@@ -29,7 +28,5 @@ public interface Constant {
 		public static final String STATUS_0 = "0";
 		// 消息已经读取
 		public static final String STATUS_1 = "1";
-
 	}
-
 }

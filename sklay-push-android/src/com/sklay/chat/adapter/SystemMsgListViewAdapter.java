@@ -16,7 +16,6 @@ import com.sklay.chat.ui.SystemMessageActivity;
 import com.sklay.core.chat.nio.mutual.Message;
 
 public class SystemMsgListViewAdapter extends BaseAdapter {
-
 	protected List<Message> list;
 	protected SystemMessageActivity scactivity;
 	int faceSize = 30;
@@ -82,5 +81,4 @@ public class SystemMsgListViewAdapter extends BaseAdapter {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
 		return sdf.format(new Date(t));
 	}
-
 }
