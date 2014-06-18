@@ -38,9 +38,9 @@ public class LoginActivity extends CIMMonitorActivity implements
 
 		if (!"".equals(accountEdit.getText().toString().trim())) {
 			showProgressDialog("提示", "正在登陆，请稍后......");
-			
-			
-			CIMPushManager.setAccount(this, accountEdit.getText().toString().trim());
+
+			CIMPushManager.setAccount(this, accountEdit.getText().toString()
+					.trim());
 		}
 
 	}
@@ -54,17 +54,14 @@ public class LoginActivity extends CIMMonitorActivity implements
 
 				hideProgressDialog();
 				Intent intent = new Intent(this, SystemMessageActivity.class);
-				intent.putExtra("account", accountEdit.getText().toString().trim());
+				intent.putExtra("account", accountEdit.getText().toString()
+						.trim());
 				startActivity(intent);
 				this.finish();
 			}
 		}
 
 	}
-
-	 
-
-	 
 
 	@Override
 	public void onClick(View v) {
@@ -84,5 +81,4 @@ public class LoginActivity extends CIMMonitorActivity implements
 		this.finish();
 	}
 
-	 
 }
