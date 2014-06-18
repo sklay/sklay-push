@@ -29,10 +29,10 @@ public class MessageAction
     SystemMessagePusher systemMessagePusher;
     
     /**
-     * ����http�����ȡ�� struts2 ��ģ���� ���� http ���� sender=xiaomao&receiver=xiaogou struts�Զ��Ὣ�����ֵ
-     * ����getModel()���صĶ���Ķ�Ӧ�����У���xiaomao�����message.sender����,xiaogou�����message.receiver����
-     * ʡȥ��request.getParameter("sender")��ʽ��ȡ��������������getModel()���صĶ����в����ڣ�����Ҫ��request.getParameter()��ȡ �������*Action.java��
-     * ͬ�?������ͳһ˵��!
+     * 关于http参数获取，  struts2  的模型驱动  比如 http 参数 sender=xiaomao&receiver=xiaogou
+     * struts自动会将参数的值 存入getModel()返回的对象的对应属性中，即xiaomao会存入message.sender属性,xiaogou会存入message.receiver属性
+     * 省去了request.getParameter("sender")方式获取参数，，如果参数名在getModel()返回的对象中不存在，则需要用request.getParameter()获取
+     * 其他相关*Action.java中 同理，这里做统一说明!
      */
     @RequestMapping("/send")
     @ResponseBody
@@ -50,7 +50,7 @@ public class MessageAction
             
             checkParams(message);
             
-            // ��ͻ��� ������Ϣ
+          //向客户端 发送消息
             systemMessagePusher.pushMessageToUser(message);
             
             data.put("id", message.getMid());
@@ -69,8 +69,7 @@ public class MessageAction
     }
     
     /**
-     * �ļ��ɿͻ��˷������� OSS �洢
-     * 
+     * 文件由客户端发往阿里云 OSS 存储
      * @param messageServiceImpl
      */
     /*

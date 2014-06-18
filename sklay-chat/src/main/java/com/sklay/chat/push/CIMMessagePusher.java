@@ -5,7 +5,7 @@ import com.sklay.core.chat.nio.mutual.Message;
 /**
  * 消息发送实接口
  * 
- * @author 1988fuyu@163.com
+ * @author
  */
 public interface CIMMessagePusher
 {
