@@ -50,7 +50,7 @@ public class MainIOHandler extends IoHandlerAdapter
         if (handler == null)
         {
             reply.setCode(CIMConstant.ReturnCode.CODE_405);
-            reply.setCode("KEY [" + key + "] 服务端未定义");
+            reply.setMessage("KEY [" + key + "] 服务端未定义");
         }
         else
         {
