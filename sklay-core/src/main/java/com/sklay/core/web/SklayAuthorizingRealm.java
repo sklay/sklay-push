@@ -41,7 +41,7 @@ import org.springframework.beans.factory.InitializingBean;
  * @version V1.0, 2012-12-12
  * @param <T>
  */
-public class JpaAuthorizingRealm<T> extends AuthorizingRealm implements InitializingBean
+public class SklayAuthorizingRealm<T> extends AuthorizingRealm implements InitializingBean
 {
     
     public enum SaltStyle

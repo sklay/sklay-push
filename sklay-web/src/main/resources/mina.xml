@@ -68,7 +68,8 @@
 		</property>
 	</bean>
 
-	<bean id="sessionConfig" factory-bean="serverAcceptor" factory-method="getSessionConfig">
+	<bean id="sessionConfig" factory-bean="serverAcceptor"
+		factory-method="getSessionConfig">
 		<property name="bothIdleTime" value="180" />
 		<property name="keepAlive" value="true" />
 		<property name="tcpNoDelay" value="true" />
@@ -82,7 +83,12 @@
 		<property name="reuseAddress" value="true" />
 	</bean>
 
-	<!-- 这里可以自行实现com.farsunset.cim.nio.session.SessionManager接口，实现自己的session管理器 
-		<bean id="defaultSessionManager" class="com.sklay.core.chat.nio.session.DefaultSessionManager" 
-		/> -->
+	<!-- 这里可以自行实现com.sklay.core.chat.nio.session.SessionManager接口，实现自己的session管理器 -->
+	<bean id="defaultSessionManager" class="com.sklay.core.chat.nio.session.DefaultSessionManager">
+		<property name="cacheManager" ref="shiroCacheManager"/>
+			<property name="cachingEnabled" value="true"/>
+			<property name="entityClass" value="com.sklay.bean.User"/>
+			<property name="usernameField" value="username"/>
+			<property name="passwordField" value="password"/>
+		</bean>
 </beans>

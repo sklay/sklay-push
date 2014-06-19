@@ -25,7 +25,7 @@ public class MessageDispatcher
     
     private static ThreadPoolExecutor executor = new ThreadPoolExecutor(3, 5, 20, TimeUnit.SECONDS, queue);;
     
-    final static String sendUrl = "http://%1$s:8080/ichat-servier/cgi/message_send.api";
+    final static String sendUrl = "http://%1$s/push/cgi/send";
     
     public static void execute(final Message msg, final String ip)
     {
