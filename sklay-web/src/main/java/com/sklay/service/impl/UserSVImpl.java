@@ -12,6 +12,7 @@ import com.sklay.core.query.Criteria;
 @Service("userSV")
 public class UserSVImpl implements IUserSV
 {
+    
 	@Resource
 	private UserDAO userDAO;
 

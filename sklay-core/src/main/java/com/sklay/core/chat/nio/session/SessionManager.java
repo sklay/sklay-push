@@ -1,6 +1,7 @@
 package com.sklay.core.chat.nio.session;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 客户端的 session管理接口 可自行实现此接口管理session
@@ -20,7 +21,7 @@ public interface SessionManager
      * @param account 客户端session的 key 一般可用 用户账号来对应session
      * @return
      */
-    CIMSession getSession(String account);
+    List<CIMSession> getSession(String account);
     
     /**
      * 获取所有session

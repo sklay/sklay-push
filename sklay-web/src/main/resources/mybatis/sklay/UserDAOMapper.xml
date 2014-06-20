@@ -19,6 +19,10 @@
         SELECT `ID`,`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` FROM `USER` WHERE ID = #{id};
     </select>
     
+    <select id="queryByUsername" resultMap="userResult" parameterType="String">
+        SELECT `ID`,`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` FROM `USER` WHERE USERNAME = #{username};
+    </select>
+    
     <select id="queryByCondition" resultMap="userResult" >
     	SELECT `ID`,`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` FROM `USER` WHERE 1=1 
     	<if test="_CONDITION != null and _CONDITION != ''">

@@ -215,7 +215,7 @@ public class SessionAction
             /**
              * 由于客户端断线服务端可能会无法获知的情况，客户端重连时，需要关闭旧的连接
              */
-            CIMSession oldSession = defaultSessionManager.getSession(account);
+            CIMSession oldSession = null;// defaultSessionManager.getSession(account);
             if (oldSession != null)
             {
                 

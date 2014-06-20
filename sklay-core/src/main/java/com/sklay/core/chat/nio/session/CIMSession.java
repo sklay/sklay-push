@@ -164,6 +164,62 @@ public class CIMSession implements Serializable
             session.setAttribute(key, value);
     }
     
+    /**
+     * @return the iD
+     */
+    public static String getID()
+    {
+        return ID;
+    }
+    
+    /**
+     * @param iD the iD to set
+     */
+    public static void setID(String iD)
+    {
+        ID = iD;
+    }
+    
+    /**
+     * @return the hOST
+     */
+    public static String getHOST()
+    {
+        return HOST;
+    }
+    
+    /**
+     * @param hOST the hOST to set
+     */
+    public static void setHOST(String hOST)
+    {
+        HOST = hOST;
+    }
+    
+    /**
+     * @return the session
+     */
+    public IoSession getSession()
+    {
+        return session;
+    }
+    
+    /**
+     * @param session the session to set
+     */
+    public void setSession(IoSession session)
+    {
+        this.session = session;
+    }
+    
+    /**
+     * @return the serialversionuid
+     */
+    public static long getSerialversionuid()
+    {
+        return serialVersionUID;
+    }
+    
     public boolean containsAttribute(String key)
     {
         if (session != null)
@@ -231,28 +287,115 @@ public class CIMSession implements Serializable
             session.close(immediately);
     }
     
-    public boolean equals(Object o)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode()
     {
-        
-        if (o instanceof CIMSession)
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((account == null) ? 0 : account.hashCode());
+        result = prime * result + ((bindTime == null) ? 0 : bindTime.hashCode());
+        result = prime * result + ((channel == null) ? 0 : channel.hashCode());
+        result = prime * result + ((deviceId == null) ? 0 : deviceId.hashCode());
+        result = prime * result + ((deviceModel == null) ? 0 : deviceModel.hashCode());
+        result = prime * result + ((gid == null) ? 0 : gid.hashCode());
+        result = prime * result + ((heartbeat == null) ? 0 : heartbeat.hashCode());
+        result = prime * result + ((host == null) ? 0 : host.hashCode());
+        result = prime * result + ((nid == null) ? 0 : nid.hashCode());
+        result = prime * result + ((session == null) ? 0 : session.hashCode());
+        return result;
+    }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CIMSession other = (CIMSession)obj;
+        if (account == null)
         {
-            
-            CIMSession t = (CIMSession)o;
-            if (!t.isLocalhost())
-            {
+            if (other.account != null)
                 return false;
-            }
-            if (t.session.getId() == session.getId() && t.host.equals(host))
-            {
-                return true;
-            }
-            return false;
         }
-        else
+        else if (!account.equals(other.account))
+            return false;
+        if (bindTime == null)
         {
-            return false;
+            if (other.bindTime != null)
+                return false;
         }
-        
+        else if (!bindTime.equals(other.bindTime))
+            return false;
+        if (channel == null)
+        {
+            if (other.channel != null)
+                return false;
+        }
+        else if (!channel.equals(other.channel))
+            return false;
+        if (deviceId == null)
+        {
+            if (other.deviceId != null)
+                return false;
+        }
+        else if (!deviceId.equals(other.deviceId))
+            return false;
+        if (deviceModel == null)
+        {
+            if (other.deviceModel != null)
+                return false;
+        }
+        else if (!deviceModel.equals(other.deviceModel))
+            return false;
+        if (gid == null)
+        {
+            if (other.gid != null)
+                return false;
+        }
+        else if (!gid.equals(other.gid))
+            return false;
+        if (heartbeat == null)
+        {
+            if (other.heartbeat != null)
+                return false;
+        }
+        else if (!heartbeat.equals(other.heartbeat))
+            return false;
+        if (host == null)
+        {
+            if (other.host != null)
+                return false;
+        }
+        else if (!host.equals(other.host))
+            return false;
+        if (nid == null)
+        {
+            if (other.nid != null)
+                return false;
+        }
+        else if (!nid.equals(other.nid))
+            return false;
+        if (session == null)
+        {
+            if (other.session != null)
+                return false;
+        }
+        else if (!session.equals(other.session))
+            return false;
+        return true;
     }
     
     public void setIoSession(IoSession session)
@@ -263,6 +406,19 @@ public class CIMSession implements Serializable
     public IoSession getIoSession()
     {
         return session;
+    }
+    
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString()
+    {
+        return "CIMSession [session=" + session + ", gid=" + gid + ", nid=" + nid + ", deviceId=" + deviceId
+            + ", host=" + host + ", account=" + account + ", channel=" + channel + ", deviceModel=" + deviceModel
+            + ", bindTime=" + bindTime + ", heartbeat=" + heartbeat + "]";
     }
     
 }

@@ -1,28 +1,39 @@
 package com.sklay.chat.session;
 
 import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Component;
 
 import com.sklay.core.chat.nio.session.CIMSession;
 import com.sklay.core.chat.nio.session.SessionManager;
 
+@Component
 public class ClusterSessionManager implements SessionManager
 {
     
     // private static HashMap<String,IoSession> sessions =new HashMap<String,IoSession>();
     
+    @Resource
+    private SqlSessionTemplate sessionTemplate;
+    
     /**
-       *  
-       */
+     * 
+     */
     public void addSession(String account, CIMSession session)
     {
-        
+        Object object = sessionTemplate.selectOne("com.sklay.dao.UserDAO.queryByUsername", account);
+        System.out.println(object.toString());
         /**
          * 下面 将session 存入数据库
          */
         
     }
     
-    public CIMSession getSession(String account)
+    public List<CIMSession> getSession(String account)
     {
         
         // 这里查询数据库
