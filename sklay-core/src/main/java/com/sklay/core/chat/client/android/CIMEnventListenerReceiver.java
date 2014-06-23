@@ -11,9 +11,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.sklay.core.chat.nio.constant.CIMConstant;
+import com.sklay.core.chat.nio.mutual.ClientData;
 import com.sklay.core.chat.nio.mutual.Message;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
-import com.sklay.core.chat.nio.mutual.SentBody;
+import com.sklay.core.chat.nio.mutual.ServerData;
 
 /**
  * 消息入口，所有消息都会经过这里
@@ -61,17 +61,17 @@ public abstract class CIMEnventListenerReceiver extends BroadcastReceiver implem
         
         if (it.getAction().equals(CIMConnectorManager.ACTION_REPLY_RECEIVED))
         {
-            onReplyReceived((ReplyBody)it.getSerializableExtra("replyBody"));
+            onReplyReceived((ServerData)it.getSerializableExtra("replyBody"));
         }
         
         if (it.getAction().equals(CIMConnectorManager.ACTION_SENT_FAILED))
         {
-            onSentFailed((Exception)it.getSerializableExtra("exception"), (SentBody)it.getSerializableExtra("sentBody"));
+            onSentFailed((Exception)it.getSerializableExtra("exception"), (ClientData)it.getSerializableExtra("sentBody"));
         }
         
         if (it.getAction().equals(CIMConnectorManager.ACTION_SENT_SUCCESS))
         {
-            onSentSucceed((SentBody)it.getSerializableExtra("sentBody"));
+            onSentSucceed((ClientData)it.getSerializableExtra("sentBody"));
         }
         
         if (it.getAction().equals(CIMConnectorManager.ACTION_UNCAUGHT_EXCEPTION))
@@ -148,7 +148,7 @@ public abstract class CIMEnventListenerReceiver extends BroadcastReceiver implem
         onMessageReceived(message);
     }
     
-    private void onSentFailed(Exception e, SentBody body)
+    private void onSentFailed(Exception e, ClientData body)
     {
         
         // 与服务端端开链接，重新连接
@@ -173,7 +173,7 @@ public abstract class CIMEnventListenerReceiver extends BroadcastReceiver implem
         onConnectionSucceed();
     }
     
-    private void onSentSucceed(SentBody body)
+    private void onSentSucceed(ClientData body)
     {
     }
     
@@ -181,7 +181,7 @@ public abstract class CIMEnventListenerReceiver extends BroadcastReceiver implem
     public abstract void onMessageReceived(com.sklay.core.chat.nio.mutual.Message message);
     
     @Override
-    public abstract void onReplyReceived(ReplyBody body);
+    public abstract void onReplyReceived(ServerData body);
     
     public abstract void onNetworkChanged(NetworkInfo info);
 }

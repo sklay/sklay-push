@@ -2,6 +2,8 @@ package com.sklay.core.chat.nio.mutual;
 
 import java.io.Serializable;
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * 消息对象
  * 
@@ -157,7 +159,13 @@ public class Message implements Serializable
         this.format = format;
     }
     
+    @Override
     public String toString()
+    {
+        return JSONObject.toJSONString(this);
+    }
+    
+    public String toString2()
     {
         
         StringBuffer buffer = new StringBuffer();

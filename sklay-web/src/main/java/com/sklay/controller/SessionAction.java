@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sklay.chat.push.SystemMessagePusher;
 import com.sklay.core.chat.nio.constant.CIMConstant;
 import com.sklay.core.chat.nio.filter.ClientMessageCodecFactory;
+import com.sklay.core.chat.nio.mutual.ClientData;
 import com.sklay.core.chat.nio.mutual.Message;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
-import com.sklay.core.chat.nio.mutual.SentBody;
+import com.sklay.core.chat.nio.mutual.ServerData;
 import com.sklay.core.chat.nio.session.CIMSession;
 import com.sklay.core.chat.nio.session.DefaultSessionManager;
 
@@ -91,13 +91,13 @@ public class SessionAction
         connectFuture.awaitUninterruptibly();
         session = connectFuture.getSession();
         
-        SentBody sent = new SentBody();
+        ClientData sent = new ClientData();
         
         sent.setKey(CIMConstant.RequestKey.CLIENT_BIND);
-        sent.put("account", "admin");
-        sent.put("deviceId", "1234567890");
-        sent.put("channel", "web");
-        sent.put("device", "sasasassass");
+        sent.setAccount("admin");
+        sent.setDeviceId("1234567890");
+        sent.setChannel("web");
+        sent.setDevice("sasasassass");
         
         CIMSession cimSession = new CIMSession(session);
         process(cimSession, sent);
@@ -144,7 +144,7 @@ public class SessionAction
         {
             
             System.out.println("******************WEB 与服务器连接空闲:" + session.getLocalAddress());
-            SentBody sent = new SentBody();
+            ClientData sent = new ClientData();
             sent.setKey(CIMConstant.RequestKey.CLIENT_HEARTBEAT);
             // send(sent);
             
@@ -179,7 +179,7 @@ public class SessionAction
                 System.out.println(" ***************messageReceived   Message   ->" + obj.toString()
                     + "  ********************");
             }
-            if (obj instanceof ReplyBody)
+            if (obj instanceof ServerData)
             {
                 System.out.println(" ***************messageReceived   ReplyBody   ->" + obj.toString()
                     + "  ********************");
@@ -195,23 +195,23 @@ public class SessionAction
         }
     };
     
-    public ReplyBody process(CIMSession newSession, SentBody message)
+    public ServerData process(CIMSession newSession, ClientData message)
     {
         
-        ReplyBody reply = new ReplyBody();
+        ServerData reply = new ServerData();
         // DefaultSessionManager sessionManager =
         // ((DefaultSessionManager)ContextHolder.getBean("defaultSessionManager"));
         try
         {
             
-            String account = message.get("account");
+            String account = message.getAccount();
             
             newSession.setAccount(account);
-            newSession.setDeviceId(message.get("deviceId"));
+            newSession.setDeviceId(message.getDeviceId());
             newSession.setGid(UUID.randomUUID().toString());
             newSession.setHost(InetAddress.getLocalHost().getHostAddress());
-            newSession.setChannel(message.get("channel"));
-            newSession.setDeviceModel(message.get("device"));
+            newSession.setChannel(message.getChannel());
+            newSession.setDeviceModel(message.getDevice());
             /**
              * 由于客户端断线服务端可能会无法获知的情况，客户端重连时，需要关闭旧的连接
              */
@@ -264,8 +264,7 @@ public class SessionAction
             reply.setCode(CIMConstant.ReturnCode.CODE_500);
             e.printStackTrace();
         }
-        System.out.println("bind :account:" + message.get("account") + "-----------------------------"
-            + reply.getCode());
+        System.out.println("bind :account:" + message.getAccount() + "-----------------------------" + reply.getCode());
         return reply;
     }
 }

@@ -1,21 +1,15 @@
 package com.sklay.core.chat.nio.filter;
 
-import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.CumulativeProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sklay.core.chat.nio.constant.CIMConstant;
-import com.sklay.core.chat.nio.mutual.SentBody;
+import com.sklay.core.chat.nio.mutual.ClientData;
 
 /**
  * 服务端接收消息解码，可在此解密消息
@@ -59,19 +53,20 @@ public class ServerMessageDecoder extends CumulativeProtocolDecoder
             String message = new String(bytes, charset);
             buff.clear();
             
-            SentBody body = new SentBody();
+            ClientData body = new ClientData();
             
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(new ByteArrayInputStream(message.getBytes(charset)));
-            body.setKey(doc.getElementsByTagName("key").item(0).getTextContent());
-            NodeList items = doc.getElementsByTagName("data").item(0).getChildNodes();
-            for (int i = 0; i < items.getLength(); i++)
-            {
-                Node node = items.item(i);
-                body.getData().put(node.getNodeName(), node.getTextContent());
-            }
-            
+            body = JSONObject.parseObject(message, ClientData.class);
+            // DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            // DocumentBuilder builder = factory.newDocumentBuilder();
+            // Document doc = builder.parse(new ByteArrayInputStream(message.getBytes(charset)));
+            // body.setKey(doc.getElementsByTagName("key").item(0).getTextContent());
+            // NodeList items = doc.getElementsByTagName("data").item(0).getChildNodes();
+            // for (int i = 0; i < items.getLength(); i++)
+            // {
+            // Node node = items.item(i);
+            // body.getData().put(node.getNodeName(), node.getTextContent());
+            // }
+            //
             out.write(body);
         }
         return complete;

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.telephony.TelephonyManager;
 
 import com.sklay.core.chat.nio.constant.CIMConstant;
-import com.sklay.core.chat.nio.mutual.SentBody;
+import com.sklay.core.chat.nio.mutual.ClientData;
 
 /**
  * CIM 功能接口
@@ -78,14 +78,19 @@ public class CIMPushManager
         }
         
         String imei = ((TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-        SentBody sent = new SentBody();
-        sent.setKey(CIMConstant.RequestKey.CLIENT_BIND);
-        sent.put("account", account);
-        sent.put("deviceId", imei);
-        sent.put("channel", "android");
-        sent.put("device", android.os.Build.MODEL);
+        ClientData data = new ClientData();
+        data.setKey(CIMConstant.RequestKey.CLIENT_BIND);
+        data.setAccount(account);
+        data.setChannel("android");
+        data.setDevice(android.os.Build.MODEL);
+        data.setDeviceId(imei);
         
-        sendRequest(context, sent);
+        // sent.put("account", account);
+        // sent.put("deviceId", imei);
+        // sent.put("channel", "android");
+        // sent.put("device", android.os.Build.MODEL);
+        
+        sendRequest(context, data);
         
     }
     
@@ -108,7 +113,7 @@ public class CIMPushManager
      * @param context
      * @body
      */
-    public static void sendRequest(Context context, SentBody body)
+    public static void sendRequest(Context context, ClientData body)
     {
         
         boolean isManualDestory = CIMDataConfig.getBoolean(context, CIMDataConfig.KEY_CIM_DESTORYED);

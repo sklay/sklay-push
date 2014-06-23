@@ -1,7 +1,6 @@
 package com.sklay.chat.handler;
 
 import java.net.InetAddress;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,9 +10,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.sklay.core.chat.nio.constant.CIMConstant;
 import com.sklay.core.chat.nio.handle.CIMRequestHandler;
+import com.sklay.core.chat.nio.mutual.ClientData;
 import com.sklay.core.chat.nio.mutual.Message;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
-import com.sklay.core.chat.nio.mutual.SentBody;
+import com.sklay.core.chat.nio.mutual.ServerData;
 import com.sklay.core.chat.nio.session.CIMSession;
 import com.sklay.core.chat.nio.session.DefaultSessionManager;
 
@@ -41,23 +40,23 @@ public class BindHandler<T> implements CIMRequestHandler
     
     private SqlSessionTemplate sessionTemplate;
     
-    public ReplyBody process(CIMSession newSession, SentBody message)
+    public ServerData process(CIMSession newSession, ClientData message)
     {
         
-        ReplyBody reply = new ReplyBody();
+        ServerData reply = new ServerData();
         // DefaultSessionManager sessionManager =
         // ((DefaultSessionManager)ContextHolder.getBean("defaultSessionManager"));
         try
         {
             
-            String account = message.get("account");
+            String account = message.getAccount();
             
             newSession.setAccount(account);
-            newSession.setDeviceId(message.get("deviceId"));
+            newSession.setDeviceId(message.getDeviceId());
             newSession.setGid(UUID.randomUUID().toString());
             newSession.setHost(InetAddress.getLocalHost().getHostAddress());
-            newSession.setChannel(message.get("channel"));
-            newSession.setDeviceModel(message.get("device"));
+            newSession.setChannel(message.getChannel());
+            newSession.setDeviceModel(message.getDevice());
             /**
              * 由于客户端断线服务端可能会无法获知的情况，客户端重连时，需要关闭旧的连接
              */
@@ -113,7 +112,7 @@ public class BindHandler<T> implements CIMRequestHandler
             reply.setCode(CIMConstant.ReturnCode.CODE_500);
             e.printStackTrace();
         }
-        logger.debug("bind :account:" + message.get("account") + "-----------------------------" + reply.getCode());
+        logger.debug("bind :account:" + message.getAccount() + "-----------------------------" + reply.getCode());
         
         return reply;
     }

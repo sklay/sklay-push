@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 
 import com.sklay.core.chat.nio.constant.CIMConstant;
 import com.sklay.core.chat.nio.handle.CIMRequestHandler;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
-import com.sklay.core.chat.nio.mutual.SentBody;
+import com.sklay.core.chat.nio.mutual.ClientData;
+import com.sklay.core.chat.nio.mutual.ServerData;
 import com.sklay.core.chat.nio.session.CIMSession;
 import com.sklay.core.chat.nio.session.DefaultSessionManager;
 
@@ -23,7 +23,7 @@ public class SessionClosedHandler implements CIMRequestHandler
     @Resource
     private DefaultSessionManager defaultSessionManager;
     
-    public ReplyBody process(CIMSession ios, SentBody message)
+    public ServerData process(CIMSession ios, ClientData message)
     {
         
         // DefaultSessionManager sessionManager =

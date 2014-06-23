@@ -8,8 +8,8 @@ import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 
 import com.sklay.core.chat.nio.constant.CIMConstant;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
-import com.sklay.core.chat.nio.mutual.SentBody;
+import com.sklay.core.chat.nio.mutual.ClientData;
+import com.sklay.core.chat.nio.mutual.ServerData;
 import com.sklay.core.chat.nio.session.CIMSession;
 
 /**
@@ -45,8 +45,8 @@ public class MainIOHandler extends IoHandlerAdapter
         logger.debug("message: " + message.toString());
         
         CIMSession cimSession = new CIMSession(ios);
-        ReplyBody reply = new ReplyBody();
-        SentBody body = (SentBody)message;
+        ServerData reply = new ServerData();
+        ClientData body = (ClientData)message;
         String key = body.getKey();
         
         CIMRequestHandler handler = handlers.get(key);

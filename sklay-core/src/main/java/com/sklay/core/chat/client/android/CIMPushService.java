@@ -1,11 +1,11 @@
 package com.sklay.core.chat.client.android;
 
+import com.sklay.core.chat.nio.mutual.ClientData;
+
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-
-import com.sklay.core.chat.nio.mutual.SentBody;
 
 /**
  * 与服务端连接服务
@@ -45,7 +45,7 @@ public class CIMPushService extends Service
         
         if (CIMPushManager.ACTION_SENDREQUEST.equals(action))
         {
-            manager.send((SentBody)intent.getSerializableExtra(CIMPushManager.KEY_SEND_BODY));
+            manager.send((ClientData)intent.getSerializableExtra(CIMPushManager.KEY_SEND_BODY));
         }
         
         if (CIMPushManager.ACTION_DISCONNECTION.equals(action))

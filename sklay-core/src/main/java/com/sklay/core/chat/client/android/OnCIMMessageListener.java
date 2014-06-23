@@ -3,7 +3,7 @@ package com.sklay.core.chat.client.android;
 import android.net.NetworkInfo;
 
 import com.sklay.core.chat.nio.mutual.Message;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
+import com.sklay.core.chat.nio.mutual.ServerData;
 
 /**
  * CIM 主要事件接口 类名称：OnCIMMessageListener 类描述： 创建人： 3979434 修改人： 3979434 修改时间： 2014-4-28 下午5:07:47 修改备注：
@@ -26,7 +26,7 @@ public interface OnCIMMessageListener
      * 
      * @param replybody
      */
-    public abstract void onReplyReceived(ReplyBody replybody);
+    public abstract void onReplyReceived(ServerData serverData);
     
     /**
      * 当手机网络发生变化时调用

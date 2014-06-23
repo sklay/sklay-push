@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
 import org.apache.mina.core.future.ConnectFuture;
 import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.service.IoHandlerAdapter;
@@ -12,6 +13,7 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -19,9 +21,9 @@ import android.net.NetworkInfo;
 
 import com.sklay.core.chat.nio.constant.CIMConstant;
 import com.sklay.core.chat.nio.filter.ClientMessageCodecFactory;
+import com.sklay.core.chat.nio.mutual.ClientData;
 import com.sklay.core.chat.nio.mutual.Message;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
-import com.sklay.core.chat.nio.mutual.SentBody;
+import com.sklay.core.chat.nio.mutual.ServerData;
 
 /**
  * 连接服务端管理，cim核心处理类，管理连接，以及消息处理
@@ -151,7 +153,7 @@ class CIMConnectorManager
         });
     }
     
-    public void send(final SentBody body)
+    public void send(final ClientData body)
     {
         
         executor.execute(new Runnable()
@@ -277,7 +279,7 @@ class CIMConnectorManager
         {
             
             System.out.println("******************CIM与服务器连接空闲:" + session.getLocalAddress());
-            SentBody sent = new SentBody();
+            ClientData sent = new ClientData();
             sent.setKey(CIMConstant.RequestKey.CLIENT_HEARTBEAT);
             send(sent);
         }
@@ -297,7 +299,11 @@ class CIMConnectorManager
         public void messageReceived(IoSession session, Object obj)
             throws Exception
         {
+            System.out.println("230 -> Object obj : " + obj);
             
+            System.out.println("obj instanceof Message  :" + (obj instanceof Message));
+            
+            System.out.println("obj instanceof ReplyBody  :" + (obj instanceof ServerData));
             if (obj instanceof Message)
             {
                 
@@ -307,12 +313,12 @@ class CIMConnectorManager
                 context.sendBroadcast(intent);
                 
             }
-            if (obj instanceof ReplyBody)
+            if (obj instanceof ServerData)
             {
                 
                 Intent intent = new Intent();
                 intent.setAction(ACTION_REPLY_RECEIVED);
-                intent.putExtra("replyBody", (ReplyBody)obj);
+                intent.putExtra("replyBody", (ServerData)obj);
                 context.sendBroadcast(intent);
             }
         }
@@ -324,7 +330,7 @@ class CIMConnectorManager
             
             Intent intent = new Intent();
             intent.setAction(ACTION_SENT_SUCCESS);
-            intent.putExtra("sentBody", (SentBody)message);
+            intent.putExtra("sentBody", (ClientData)message);
             context.sendBroadcast(intent);
             
         }
