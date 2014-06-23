@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.sklay.core.chat.client.android.CIMListenerManager;
 import com.sklay.core.chat.client.android.OnCIMMessageListener;
 import com.sklay.core.chat.nio.mutual.Message;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
+import com.sklay.core.chat.nio.mutual.ServerData;
 
 public abstract class CIMMonitorActivity extends Activity implements
 		OnCIMMessageListener {
@@ -56,7 +56,7 @@ public abstract class CIMMonitorActivity extends Activity implements
 	}
 
 	@Override
-	public void onReplyReceived(ReplyBody reply) {
+	public void onReplyReceived(ServerData reply) {
 	}
 
 	@Override

@@ -823,7 +823,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int troop_default_head_3=0x7f020190;
     }
     public static final class id {
-        public static final int TITLE_TEXT=0x7f0b0010;
+        public static final int TITLE_TEXT=0x7f0b0011;
         public static final int TOP_BACK_BUTTON=0x7f0b000e;
         public static final int account=0x7f0b0004;
         public static final int chat_list=0x7f0b0008;
@@ -840,6 +840,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int talk=0x7f0b000f;
         public static final int textMsgType=0x7f0b0009;
         public static final int time=0x7f0b000a;
+        public static final int xiaogou=0x7f0b0010;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;

@@ -13,7 +13,7 @@ import com.sklay.chat.ui.SystemMessageActivity;
 import com.sklay.core.chat.client.android.CIMEnventListenerReceiver;
 import com.sklay.core.chat.client.android.CIMListenerManager;
 import com.sklay.core.chat.nio.mutual.Message;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
+import com.sklay.core.chat.nio.mutual.ServerData;
 
 /**
  * 消息入口，所有消息都会经过这里
@@ -60,7 +60,7 @@ public final class CustomCIMMessageReceiver extends CIMEnventListenerReceiver {
 
 	// 当收到sendbody的响应时，会执行onReplyReceived
 	@Override
-	public void onReplyReceived(ReplyBody body) {
+	public void onReplyReceived(ServerData body) {
 		for (int index = 0; index < CIMListenerManager.getCIMListeners().size(); index++) {
 			CIMListenerManager.getCIMListeners().get(index)
 					.onReplyReceived(body);

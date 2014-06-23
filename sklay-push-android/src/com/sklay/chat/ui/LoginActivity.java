@@ -11,7 +11,7 @@ import com.sklay.chat.R;
 import com.sklay.chat.app.CIMMonitorActivity;
 import com.sklay.core.chat.client.android.CIMPushManager;
 import com.sklay.core.chat.nio.constant.CIMConstant;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
+import com.sklay.core.chat.nio.mutual.ServerData;
 
 public class LoginActivity extends CIMMonitorActivity implements
 		OnClickListener {
@@ -35,7 +35,6 @@ public class LoginActivity extends CIMMonitorActivity implements
 	}
 
 	private void doLogin() {
-
 		if (!"".equals(accountEdit.getText().toString().trim())) {
 			showProgressDialog("提示", "正在登陆，请稍后......");
 
@@ -46,7 +45,7 @@ public class LoginActivity extends CIMMonitorActivity implements
 	}
 
 	@Override
-	public void onReplyReceived(final ReplyBody reply) {
+	public void onReplyReceived(final ServerData reply) {
 
 		if (reply.getKey().equals(CIMConstant.RequestKey.CLIENT_BIND)) {
 

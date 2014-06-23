@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,7 +40,7 @@ public class SystemMessageActivity extends CIMMonitorActivity implements
 
 	// 客户端向客户端发送消息接口地址
 	public final static String SEND_MESSAGE_API_URL = Constant.SERVER_URL
-			+ "/cgi/message_send.api";
+			+ "/cgi/send";
 
 	HttpAPIRequester requester;
 
@@ -58,6 +59,35 @@ public class SystemMessageActivity extends CIMMonitorActivity implements
 		chatListView = (ListView) findViewById(R.id.chat_list);
 		findViewById(R.id.TOP_BACK_BUTTON).setOnClickListener(this);
 		findViewById(R.id.TOP_BACK_BUTTON).setVisibility(View.VISIBLE);
+
+		Button button = (Button) findViewById(R.id.talk);
+
+		button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				try {
+					sendMessage();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		Button buttons = (Button) findViewById(R.id.xiaogou);
+
+		buttons.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				try {
+					sendMessagexiaogou();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
 		((TextView) findViewById(R.id.TOP_BACK_BUTTON)).setText("登录");
 		((TextView) findViewById(R.id.TITLE_TEXT)).setText("系统消息");
 		((TextView) findViewById(R.id.account)).setText(this.getIntent()
@@ -112,7 +142,20 @@ public class SystemMessageActivity extends CIMMonitorActivity implements
 
 		apiParams.put("content", "hello world!");
 		apiParams.put("sender", "xiaogou");// 发送者账号
-		apiParams.put("receiver", "xiaomao");// 消息接收者账号
+		apiParams.put("receiver", "admin");// 消息接收者账号
+		apiParams.put("type", Constant.MessageType.TYPE_0);
+
+		requester.execute(new TypeReference<JSONObject>() {
+		}.getType(), null, SEND_MESSAGE_API_URL);
+
+	}
+
+	// 发送消息示范，用户客户端与客户端之间的消息发送
+	private void sendMessagexiaogou() throws Exception {
+
+		apiParams.put("content", "hello world!");
+		apiParams.put("sender", "xx");// 发送者账号
+		apiParams.put("receiver", "xiaogou");// 消息接收者账号
 		apiParams.put("type", Constant.MessageType.TYPE_0);
 
 		requester.execute(new TypeReference<JSONObject>() {

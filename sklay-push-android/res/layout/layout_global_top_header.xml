@@ -42,6 +42,24 @@
         android:textSize="14.0sp"
         android:text="回复"
           />
+    <Button
+        android:id="@+id/xiaogou"
+        android:layout_width="wrap_content"
+        android:layout_height="36.0dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="90.0dip"
+        android:background="@drawable/top_back_left_selector"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:maxWidth="96.0dip"
+        android:minWidth="55.0dip"
+        android:paddingRight="10dip"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="14.0sp"
+        android:text="xiaogou"
+          />
     
     <TextView
         android:id="@+id/TITLE_TEXT"
