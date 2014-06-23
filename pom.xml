@@ -10,6 +10,7 @@
 		<module>sklay-core</module>
 		<module>sklay-chat</module>
 		<module>sklay-web</module>
+		<module>sklay-android-push</module>
 	</modules>
 
 	<properties>
