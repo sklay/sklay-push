@@ -66,7 +66,8 @@ public abstract class CIMEnventListenerReceiver extends BroadcastReceiver implem
         
         if (it.getAction().equals(CIMConnectorManager.ACTION_SENT_FAILED))
         {
-            onSentFailed((Exception)it.getSerializableExtra("exception"), (ClientData)it.getSerializableExtra("sentBody"));
+            onSentFailed((Exception)it.getSerializableExtra("exception"),
+                (ClientData)it.getSerializableExtra("sentBody"));
         }
         
         if (it.getAction().equals(CIMConnectorManager.ACTION_SENT_SUCCESS))

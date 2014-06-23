@@ -52,7 +52,7 @@
 		       return;
 		    }
 		    showProcess('正在发送，请稍后......');
-		    $.post("${ctx }/cgi/send.action", {content:message,type:2,sender:'system',receiver:account},
+		    $.post("${ctx }/cgi/send", {content:message,type:2,sender:'system',receiver:account},
 			   function(data){
 			   
 			      hideProcess();
@@ -80,11 +80,12 @@
 
 							<thead>
 								<tr class="tableHeader">
-									<th width="20%">账号</th>
-									<th width="20%">终端</th>
-									<th width="20%">在线时长</th>
-									<th width="20%">心跳时间</th>
-									<th width="40%">操作</th>
+									<th width="15%">账号</th>
+									<th width="15%">终端来源</th>
+									<th width="15%">终端ID</th>
+									<th width="15%">终端型号</th>
+									<th width="15%">在线时长</th>
+									<th width="10%">操作</th>
 								</tr>
 								 
 							</thead>
