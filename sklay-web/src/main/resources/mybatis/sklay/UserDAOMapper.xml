@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.sklay.dao.UserDAO">
+	<resultMap type="com.sklay.bean.User" id="userResult">
+		<id property="id" column="ID" javaType="long" />
+		<result property="username" column="USERNAME" javaType="String"/>
+		<result property="password" column="PASSWORD" javaType="String"/>
+		<result property="nickname" column="NICKNAME" javaType="String"/>
+		<result property="phone" column="PHONE" javaType="String"/>
+		<result property="createtime" column="CREATETIME" javaType="Date"/>
+		<result property="updatetime" column="UPDATETIME" javaType="Date"/>
+	</resultMap>
+	
+	<select id="query" resultMap="userResult">
+		SELECT `ID`,`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` FROM `USER`;
+	</select>
+	
+    <select id="queryById" resultMap="userResult" parameterType="long">
+        SELECT `ID`,`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` FROM `USER` WHERE ID = #{id};
+    </select>
+    
+    <select id="queryByUsername" resultMap="userResult" parameterType="String">
+        SELECT `ID`,`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` FROM `USER` WHERE USERNAME = #{username};
+    </select>
+    
+    <select id="queryByCondition" resultMap="userResult" >
+    	SELECT `ID`,`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` FROM `USER` WHERE 1=1 
+    	<if test="_CONDITION != null and _CONDITION != ''">
+    	${_CONDITION} 
+    	</if>
+    	<if test="_ORDER_BY != null and _ORDER_BY != ''">
+    	${_ORDER_BY} 
+    	</if>
+    	<if test="_LIMIT != null and _LIMIT != ''">
+    	${_LIMIT}
+    	</if>
+    </select>
+    
+    <select id="queryCountByCondition" resultType="int">
+    	SELECT COUNT(*) FROM `USER` WHERE 1=1 
+    	<if test="_CONDITION != null and _CONDITION != ''">
+    	${_CONDITION} 
+    	</if>
+    </select>
+    
+    <insert id="insert" parameterType="com.sklay.bean.User">
+		<selectKey resultType="long" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+    	INSERT INTO `USER`(`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME`) VALUES (#{username},#{password},#{nickname},#{phone},#{createtime},#{updatetime});
+    </insert>
+    
+    <insert id="insertBatch">
+    	INSERT INTO `USER` ( `USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` ) VALUES 
+	    <foreach collection="list" item="item" index="index" separator=",">
+	        (#{item.username},#{item.password},#{item.nickname},#{item.phone},#{item.createtime},#{item.updatetime})
+	    </foreach>
+    </insert>
+    
+    <delete id="delete" parameterType="long">
+    	DELETE FROM `USER` WHERE `ID` = #{id};
+    </delete>
+    
+    <delete id="deleteBatch">
+    	DELETE FROM `USER` WHERE `ID` IN 
+    	<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+    		#{item}
+    	</foreach>
+    </delete>
+    
+    <update id="update" parameterType="com.sklay.bean.User">
+    	UPDATE `USER` SET `USERNAME`=#{username},`PASSWORD`=#{password},`NICKNAME`=#{nickname},`PHONE`=#{phone},`CREATETIME`=#{createtime},`UPDATETIME`=#{updatetime} WHERE `ID` = #{id}
+    </update>
+    
+    <update id="updateBatch">
+    	
+    </update>
+</mapper>
+

@@ -11,21 +11,9 @@
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
-		<listener-class>com.sklay.core.web.SlyakContextLoaderListener</listener-class>
+		<listener-class>com.sklay.core.web.SklayContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- jpa open entity manager 
-	<filter>
-    	<filter-name>jpa-open-entity-manager</filter-name>
-    	<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
-	</filter>
-    <filter-mapping>
-    	<filter-name>jpa-open-entity-manager</filter-name>
-    	<url-pattern>/*</url-pattern>
-    	<dispatcher>REQUEST</dispatcher>
-		<dispatcher>ERROR</dispatcher>
-	</filter-mapping>
-	-->
 	<!-- CharacterEncodingFilter -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>

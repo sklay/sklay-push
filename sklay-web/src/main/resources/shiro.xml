@@ -58,10 +58,10 @@
 		<property name="cachingEnabled" value="true"/>
 	</bean> -->
 	
-	<bean id="jpaRealm" class="com.sklay.core.web.JpaAuthorizingRealm">
+	<bean id="jpaRealm" class="com.sklay.core.web.SklayAuthorizingRealm">
 		<property name="cacheManager" ref="shiroCacheManager"/>
 		<property name="cachingEnabled" value="true"/>
-		<property name="entityClass" value="com.sklay.entity.User"/>
+		<property name="entityClass" value="com.sklay.bean.User"/>
 		<property name="usernameField" value="userName"/>
 		<property name="passwordField" value="password"/>
 		<property name="credentialsMatcher" ref="credentialsMatcher"/>

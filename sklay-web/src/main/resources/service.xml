@@ -44,6 +44,10 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">  
+    	<constructor-arg index="0" ref="sqlSessionFactory"/>  
+	</bean>  
+
 	<!-- 事物拦截配置开始 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>

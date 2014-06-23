@@ -1,11 +1,12 @@
 package com.sklay.chat.handler;
 
-import org.apache.mina.core.session.IoSession;
+import javax.annotation.Resource;
 
-import com.sklay.chat.common.util.ContextHolder;
+import com.sklay.core.chat.nio.constant.CIMConstant;
 import com.sklay.core.chat.nio.handle.CIMRequestHandler;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
-import com.sklay.core.chat.nio.mutual.SentBody;
+import com.sklay.core.chat.nio.mutual.ClientData;
+import com.sklay.core.chat.nio.mutual.ServerData;
+import com.sklay.core.chat.nio.session.CIMSession;
 import com.sklay.core.chat.nio.session.DefaultSessionManager;
 
 /**
@@ -16,18 +17,21 @@ import com.sklay.core.chat.nio.session.DefaultSessionManager;
 public class LogoutHandler implements CIMRequestHandler
 {
     
-    public ReplyBody process(IoSession ios, SentBody message)
+    @Resource
+    private DefaultSessionManager defaultSessionManager;
+    
+    public ServerData process(CIMSession ios, ClientData message)
     {
         
-        DefaultSessionManager sessionManager = ((DefaultSessionManager)ContextHolder.getBean("defaultSessionManager"));
+        // DefaultSessionManager sessionManager =
+        // ((DefaultSessionManager)ContextHolder.getBean("defaultSessionManager"));
         
-        String account = ios.getAttribute("account").toString();
-        ios.removeAttribute("account");
+        String account = ios.getAttribute(CIMConstant.SESSION_KEY).toString();
+        ios.removeAttribute(CIMConstant.SESSION_KEY);
         ios.close(true);
         
-        sessionManager.removeSession(account);
+        defaultSessionManager.removeSession(account);
         
         return null;
     }
-    
 }

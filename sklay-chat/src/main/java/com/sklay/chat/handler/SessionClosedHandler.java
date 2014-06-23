@@ -1,12 +1,14 @@
 package com.sklay.chat.handler;
 
-import org.apache.log4j.Logger;
-import org.apache.mina.core.session.IoSession;
+import javax.annotation.Resource;
 
-import com.sklay.chat.common.util.ContextHolder;
+import org.apache.log4j.Logger;
+
+import com.sklay.core.chat.nio.constant.CIMConstant;
 import com.sklay.core.chat.nio.handle.CIMRequestHandler;
-import com.sklay.core.chat.nio.mutual.ReplyBody;
-import com.sklay.core.chat.nio.mutual.SentBody;
+import com.sklay.core.chat.nio.mutual.ClientData;
+import com.sklay.core.chat.nio.mutual.ServerData;
+import com.sklay.core.chat.nio.session.CIMSession;
 import com.sklay.core.chat.nio.session.DefaultSessionManager;
 
 /**
@@ -16,24 +18,25 @@ import com.sklay.core.chat.nio.session.DefaultSessionManager;
  */
 public class SessionClosedHandler implements CIMRequestHandler
 {
-    
     protected final Logger logger = Logger.getLogger(SessionClosedHandler.class);
     
-    public ReplyBody process(IoSession ios, SentBody message)
+    @Resource
+    private DefaultSessionManager defaultSessionManager;
+    
+    public ServerData process(CIMSession ios, ClientData message)
     {
         
-        DefaultSessionManager sessionManager = ((DefaultSessionManager)ContextHolder.getBean("defaultSessionManager"));
+        // DefaultSessionManager sessionManager =
+        // ((DefaultSessionManager)ContextHolder.getBean("defaultSessionManager"));
         
-        if (ios.getAttribute("account") == null)
+        if (ios.getAttribute(CIMConstant.SESSION_KEY) == null)
         {
             return null;
         }
         
-        String account = ios.getAttribute("account").toString();
-        
-        sessionManager.removeSession(account);
+        String account = ios.getAttribute(CIMConstant.SESSION_KEY).toString();
+        defaultSessionManager.removeSession(account);
         
         return null;
     }
-    
 }

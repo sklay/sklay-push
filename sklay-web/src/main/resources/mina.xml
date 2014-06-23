@@ -29,7 +29,15 @@
 
 			<map>
 				<entry key="client_bind">
-					<bean class="com.sklay.chat.handler.BindHandler" />
+					<bean class="com.sklay.chat.handler.BindHandler">
+						<property name="sessionManager" ref="defaultSessionManager" />
+						<property name="sessionTemplate" ref="sqlSessionTemplate" />
+						<property name="queryMethod" value="com.sklay.dao.UserDAO.queryByUsername" />
+						<property name="addMethod" value="com.sklay.dao.UserDAO.insert"></property>
+						<property name="entityClass" value="com.sklay.bean.User" />
+						<property name="usernameField" value="username" />
+						<property name="passwordField" value="password" />
+					</bean>
 				</entry>
 				<entry key="client_logout">
 					<bean class="com.sklay.chat.handler.LogoutHandler" />
@@ -68,7 +76,8 @@
 		</property>
 	</bean>
 
-	<bean id="sessionConfig" factory-bean="serverAcceptor" factory-method="getSessionConfig">
+	<bean id="sessionConfig" factory-bean="serverAcceptor"
+		factory-method="getSessionConfig">
 		<property name="bothIdleTime" value="180" />
 		<property name="keepAlive" value="true" />
 		<property name="tcpNoDelay" value="true" />
@@ -82,7 +91,10 @@
 		<property name="reuseAddress" value="true" />
 	</bean>
 
-	<!-- 这里可以自行实现com.farsunset.cim.nio.session.SessionManager接口，实现自己的session管理器 
-		<bean id="defaultSessionManager" class="com.sklay.core.chat.nio.session.DefaultSessionManager" 
-		/> -->
+	<!-- 这里可以自行实现com.sklay.core.chat.nio.session.SessionManager接口，实现自己的session管理器 -->
+	<bean id="defaultSessionManager" class="com.sklay.core.chat.nio.session.DefaultSessionManager">
+		<property name="cacheKey" value="mina-cahe-key" />
+		<property name="cacheSessionKey" value="mina-session-key" />
+		<property name="cacheManager" ref="shiroCacheManager" />
+	</bean>
 </beans>
