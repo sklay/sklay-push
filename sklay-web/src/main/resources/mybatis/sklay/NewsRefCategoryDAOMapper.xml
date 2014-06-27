@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.sklay.dao.NewsRefCategoryDAO">
+	<resultMap type="com.sklay.bean.NewsRefCategory" id="newsRefCategoryResult">
+		<id property="id" column="ID" javaType="long" />
+		<result property="ncid" column="NCID" javaType="long"/>
+		<result property="nid" column="NID" javaType="long"/>
+		<result property="createTime" column="CREATE_TIME" javaType="Date"/>
+		<result property="creator" column="CREATOR" javaType="long"/>
+		<result property="updateTime" column="UPDATE_TIME" javaType="Date"/>
+		<result property="updator" column="UPDATOR" javaType="long"/>
+	</resultMap>
+	
+	<select id="query" resultMap="newsRefCategoryResult">
+		SELECT `ID`,`NCID`,`NID`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `NEWS_REF_CATEGORY`;
+	</select>
+	
+    <select id="queryById" resultMap="newsRefCategoryResult" parameterType="long">
+        SELECT `ID`,`NCID`,`NID`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `NEWS_REF_CATEGORY` WHERE ID = #{id};
+    </select>
+    
+    <select id="queryByCondition" resultMap="newsRefCategoryResult" >
+    	SELECT `ID`,`NCID`,`NID`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `NEWS_REF_CATEGORY` WHERE 1=1 
+    	<if test="_CONDITION != null and _CONDITION != ''">
+    	${_CONDITION} 
+    	</if>
+    	<if test="_ORDER_BY != null and _ORDER_BY != ''">
+    	${_ORDER_BY} 
+    	</if>
+    	<if test="_LIMIT != null and _LIMIT != ''">
+    	${_LIMIT}
+    	</if>
+    </select>
+    
+    <select id="queryCountByCondition" resultType="int">
+    	SELECT COUNT(*) FROM `NEWS_REF_CATEGORY` WHERE 1=1 
+    	<if test="_CONDITION != null and _CONDITION != ''">
+    	${_CONDITION} 
+    	</if>
+    </select>
+    
+    <insert id="insert" parameterType="com.sklay.bean.NewsRefCategory">
+		<selectKey resultType="long" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+    	INSERT INTO `NEWS_REF_CATEGORY`(`NCID`,`NID`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR`) VALUES (#{ncid},#{nid},#{createTime},#{creator},#{updateTime},#{updator});
+    </insert>
+    
+    <insert id="insertBatch">
+    	INSERT INTO `NEWS_REF_CATEGORY` ( `NCID`,`NID`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` ) VALUES 
+	    <foreach collection="list" item="item" index="index" separator=",">
+	        (#{item.ncid},#{item.nid},#{item.createTime},#{item.creator},#{item.updateTime},#{item.updator})
+	    </foreach>
+    </insert>
+    
+    <delete id="delete" parameterType="long">
+    	DELETE FROM `NEWS_REF_CATEGORY` WHERE `ID` = #{id};
+    </delete>
+    
+    <delete id="deleteBatch">
+    	DELETE FROM `NEWS_REF_CATEGORY` WHERE `ID` IN 
+    	<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+    		#{item}
+    	</foreach>
+    </delete>
+    
+    <update id="update" parameterType="com.sklay.bean.NewsRefCategory">
+    	UPDATE `NEWS_REF_CATEGORY` SET `NCID`=#{ncid},`NID`=#{nid},`CREATE_TIME`=#{createTime},`CREATOR`=#{creator},`UPDATE_TIME`=#{updateTime},`UPDATOR`=#{updator} WHERE `ID` = #{id}
+    </update>
+    
+    <update id="updateBatch">
+    	
+    </update>
+</mapper>
+

@@ -14,7 +14,8 @@ import com.sklay.core.chat.nio.mutual.ClientData;
 import com.sklay.core.chat.nio.mutual.Message;
 import com.sklay.core.chat.nio.mutual.ServerData;
 import com.sklay.core.chat.nio.session.CIMSession;
-import com.sklay.core.chat.nio.session.DefaultSessionManager;
+import com.sklay.core.chat.nio.session.impl.DefaultSessionManager;
+import com.sklay.core.query.Criteria;
 
 /**
  * 绑定账号到服务端实现
@@ -40,23 +41,21 @@ public class BindHandler<T> implements CIMRequestHandler
     
     private SqlSessionTemplate sessionTemplate;
     
-    public ServerData process(CIMSession newSession, ClientData message)
+    public ServerData process(CIMSession newSession, ClientData clientData)
     {
         
         ServerData reply = new ServerData();
-        // DefaultSessionManager sessionManager =
-        // ((DefaultSessionManager)ContextHolder.getBean("defaultSessionManager"));
         try
         {
             
-            String account = message.getAccount();
+            String account = clientData.getAccount();
             
             newSession.setAccount(account);
-            newSession.setDeviceId(message.getDeviceId());
+            newSession.setDeviceId(clientData.getDeviceId());
             newSession.setGid(UUID.randomUUID().toString());
             newSession.setHost(InetAddress.getLocalHost().getHostAddress());
-            newSession.setChannel(message.getChannel());
-            newSession.setDeviceModel(message.getDevice());
+            newSession.setChannel(clientData.getChannel());
+            newSession.setDeviceModel(clientData.getDevice());
             /**
              * 由于客户端断线服务端可能会无法获知的情况，客户端重连时，需要关闭旧的连接
              */
@@ -102,7 +101,10 @@ public class BindHandler<T> implements CIMRequestHandler
                 // 第一次设置心跳时间为登录时间
                 newSession.setBindTime(System.currentTimeMillis());
                 newSession.setHeartbeat(System.currentTimeMillis());
-                
+                reply = authentication(reply, clientData) ;
+                if(CIMConstant.ReturnCode.CODE_200.equals(reply.getCode())){
+                    return reply ;
+                }
                 sessionManager.addSession(account, newSession);
             }
             reply.setCode(CIMConstant.ReturnCode.CODE_200);
@@ -112,7 +114,31 @@ public class BindHandler<T> implements CIMRequestHandler
             reply.setCode(CIMConstant.ReturnCode.CODE_500);
             e.printStackTrace();
         }
-        logger.debug("bind :account:" + message.getAccount() + "-----------------------------" + reply.getCode());
+        logger.debug("bind :account:" + clientData.getAccount() + "-----------------------------" + reply.getCode());
+        
+        return reply;
+    }
+    
+    /**
+     * 用户认证
+     * 
+     * @param reply
+     * @return
+     */
+    protected ServerData authentication(ServerData reply, ClientData clientData)
+    {
+        Criteria criteria = new Criteria();
+        String userName = clientData.getAccount();
+        String password = clientData.getPassword();
+        
+        criteria.addEqual("USER_NAME", userName);
+        criteria.addEqual("PASSWORD", password);
+        List<Object> list = sessionTemplate.selectList(queryMethod, criteria);
+        if (CollectionUtils.isEmpty(list))
+        {
+            reply.setCode(CIMConstant.ReturnCode.CODE_200);
+            reply.setMessage("帐号不存在或密码错误");
+        }
         
         return reply;
     }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.sklay.dao.UserRefGroupDAO">
+	<resultMap type="com.sklay.bean.UserRefGroup" id="userRefGroupResult">
+		<id property="id" column="ID" javaType="long" />
+		<result property="gid" column="GID" javaType="long"/>
+		<result property="uid" column="UID" javaType="long"/>
+		<result property="role" column="ROLE" javaType="int"/>
+		<result property="status" column="STATUS" javaType="int"/>
+		<result property="createTime" column="CREATE_TIME" javaType="Date"/>
+		<result property="creator" column="CREATOR" javaType="long"/>
+		<result property="updateTime" column="UPDATE_TIME" javaType="Date"/>
+		<result property="updator" column="UPDATOR" javaType="long"/>
+	</resultMap>
+	
+	<select id="query" resultMap="userRefGroupResult">
+		SELECT `ID`,`GID`,`UID`,`ROLE`,`STATUS`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `USER_REF_GROUP`;
+	</select>
+	
+    <select id="queryById" resultMap="userRefGroupResult" parameterType="long">
+        SELECT `ID`,`GID`,`UID`,`ROLE`,`STATUS`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `USER_REF_GROUP` WHERE ID = #{id};
+    </select>
+    
+    <select id="queryByCondition" resultMap="userRefGroupResult" >
+    	SELECT `ID`,`GID`,`UID`,`ROLE`,`STATUS`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `USER_REF_GROUP` WHERE 1=1 
+    	<if test="_CONDITION != null and _CONDITION != ''">
+    	${_CONDITION} 
+    	</if>
+    	<if test="_ORDER_BY != null and _ORDER_BY != ''">
+    	${_ORDER_BY} 
+    	</if>
+    	<if test="_LIMIT != null and _LIMIT != ''">
+    	${_LIMIT}
+    	</if>
+    </select>
+    
+    <select id="queryCountByCondition" resultType="int">
+    	SELECT COUNT(*) FROM `USER_REF_GROUP` WHERE 1=1 
+    	<if test="_CONDITION != null and _CONDITION != ''">
+    	${_CONDITION} 
+    	</if>
+    </select>
+    
+    <insert id="insert" parameterType="com.sklay.bean.UserRefGroup">
+		<selectKey resultType="long" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+    	INSERT INTO `USER_REF_GROUP`(`GID`,`UID`,`ROLE`,`STATUS`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR`) VALUES (#{gid},#{uid},#{role},#{status},#{createTime},#{creator},#{updateTime},#{updator});
+    </insert>
+    
+    <insert id="insertBatch">
+    	INSERT INTO `USER_REF_GROUP` ( `GID`,`UID`,`ROLE`,`STATUS`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` ) VALUES 
+	    <foreach collection="list" item="item" index="index" separator=",">
+	        (#{item.gid},#{item.uid},#{item.role},#{item.status},#{item.createTime},#{item.creator},#{item.updateTime},#{item.updator})
+	    </foreach>
+    </insert>
+    
+    <delete id="delete" parameterType="long">
+    	DELETE FROM `USER_REF_GROUP` WHERE `ID` = #{id};
+    </delete>
+    
+    <delete id="deleteBatch">
+    	DELETE FROM `USER_REF_GROUP` WHERE `ID` IN 
+    	<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+    		#{item}
+    	</foreach>
+    </delete>
+    
+    <update id="update" parameterType="com.sklay.bean.UserRefGroup">
+    	UPDATE `USER_REF_GROUP` SET `GID`=#{gid},`UID`=#{uid},`ROLE`=#{role},`STATUS`=#{status},`CREATE_TIME`=#{createTime},`CREATOR`=#{creator},`UPDATE_TIME`=#{updateTime},`UPDATOR`=#{updator} WHERE `ID` = #{id}
+    </update>
+    
+    <update id="updateBatch">
+    	
+    </update>
+</mapper>
+

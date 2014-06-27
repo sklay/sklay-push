@@ -66,10 +66,12 @@ public class CIMPushManager
      * 
      * @param account 用户唯一ID
      */
-    public static void setAccount(Context context, String account)
+    public static void setAccount(Context context, String account, String password, int loginType)
     {
         
         CIMDataConfig.putString(context, CIMDataConfig.KEY_ACCOUNT, account);
+        CIMDataConfig.putString(context, CIMDataConfig.KEY_PASSWORD, password);
+        CIMDataConfig.putInt(context, CIMDataConfig.KEY_LOGIN_TYPE, loginType);
         
         boolean isManualDestory = CIMDataConfig.getBoolean(context, CIMDataConfig.KEY_CIM_DESTORYED);
         if (isManualDestory || account == null)
@@ -81,6 +83,7 @@ public class CIMPushManager
         ClientData data = new ClientData();
         data.setKey(CIMConstant.RequestKey.CLIENT_BIND);
         data.setAccount(account);
+        data.setPassword(password);
         data.setChannel("android");
         data.setDevice(android.os.Build.MODEL);
         data.setDeviceId(imei);
@@ -98,13 +101,17 @@ public class CIMPushManager
     {
         
         String account = CIMDataConfig.getString(context, CIMDataConfig.KEY_ACCOUNT);
-        setAccount(context, account);
+        String password = CIMDataConfig.getString(context, CIMDataConfig.KEY_PASSWORD);
+        Integer loginType = CIMDataConfig.getInt(context, CIMDataConfig.KEY_LOGIN_TYPE);
+        setAccount(context, account, password, loginType);
     }
     
     protected static void clearAccount(Context context)
     {
         
         CIMDataConfig.putString(context, CIMDataConfig.KEY_ACCOUNT, null);
+        CIMDataConfig.putString(context, CIMDataConfig.KEY_PASSWORD, null);
+        CIMDataConfig.putInt(context, CIMDataConfig.KEY_LOGIN_TYPE, 0);
     }
     
     /**
@@ -161,6 +168,8 @@ public class CIMPushManager
         
         CIMDataConfig.putBoolean(context, CIMDataConfig.KEY_CIM_DESTORYED, true);
         CIMDataConfig.putString(context, CIMDataConfig.KEY_ACCOUNT, null);
+        CIMDataConfig.putString(context, CIMDataConfig.KEY_PASSWORD, null);
+        CIMDataConfig.putInt(context, CIMDataConfig.KEY_LOGIN_TYPE, 0);
         
         Intent serviceIntent = new Intent(context, CIMPushService.class);
         serviceIntent.putExtra(SERVICE_ACTION, ACTION_DESTORY);

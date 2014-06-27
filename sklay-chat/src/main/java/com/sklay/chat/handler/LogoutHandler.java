@@ -7,7 +7,7 @@ import com.sklay.core.chat.nio.handle.CIMRequestHandler;
 import com.sklay.core.chat.nio.mutual.ClientData;
 import com.sklay.core.chat.nio.mutual.ServerData;
 import com.sklay.core.chat.nio.session.CIMSession;
-import com.sklay.core.chat.nio.session.DefaultSessionManager;
+import com.sklay.core.chat.nio.session.impl.DefaultSessionManager;
 
 /**
  * 退出连接实现

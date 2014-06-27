@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.sklay.dao.PushDAO">
+	<resultMap type="com.sklay.bean.Push" id="pushResult">
+		<id property="id" column="ID" javaType="long" />
+		<result property="status" column="STATUS" javaType="int"/>
+		<result property="category" column="CATEGORY" javaType="int"/>
+		<result property="content" column="CONTENT" javaType="String"/>
+		<result property="summary" column="SUMMARY" javaType="String"/>
+		<result property="shortUrl" column="SHORT_URL" javaType="String"/>
+		<result property="createTime" column="CREATE_TIME" javaType="Date"/>
+		<result property="creator" column="CREATOR" javaType="long"/>
+		<result property="updateTime" column="UPDATE_TIME" javaType="Date"/>
+		<result property="updator" column="UPDATOR" javaType="long"/>
+	</resultMap>
+	
+	<select id="query" resultMap="pushResult">
+		SELECT `ID`,`STATUS`,`CATEGORY`,`CONTENT`,`SUMMARY`,`SHORT_URL`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `PUSH`;
+	</select>
+	
+    <select id="queryById" resultMap="pushResult" parameterType="long">
+        SELECT `ID`,`STATUS`,`CATEGORY`,`CONTENT`,`SUMMARY`,`SHORT_URL`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `PUSH` WHERE ID = #{id};
+    </select>
+    
+    <select id="queryByCondition" resultMap="pushResult" >
+    	SELECT `ID`,`STATUS`,`CATEGORY`,`CONTENT`,`SUMMARY`,`SHORT_URL`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `PUSH` WHERE 1=1 
+    	<if test="_CONDITION != null and _CONDITION != ''">
+    	${_CONDITION} 
+    	</if>
+    	<if test="_ORDER_BY != null and _ORDER_BY != ''">
+    	${_ORDER_BY} 
+    	</if>
+    	<if test="_LIMIT != null and _LIMIT != ''">
+    	${_LIMIT}
+    	</if>
+    </select>
+    
+    <select id="queryCountByCondition" resultType="int">
+    	SELECT COUNT(*) FROM `PUSH` WHERE 1=1 
+    	<if test="_CONDITION != null and _CONDITION != ''">
+    	${_CONDITION} 
+    	</if>
+    </select>
+    
+    <insert id="insert" parameterType="com.sklay.bean.Push">
+		<selectKey resultType="long" keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+    	INSERT INTO `PUSH`(`STATUS`,`CATEGORY`,`CONTENT`,`SUMMARY`,`SHORT_URL`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR`) VALUES (#{status},#{category},#{content},#{summary},#{shortUrl},#{createTime},#{creator},#{updateTime},#{updator});
+    </insert>
+    
+    <insert id="insertBatch">
+    	INSERT INTO `PUSH` ( `STATUS`,`CATEGORY`,`CONTENT`,`SUMMARY`,`SHORT_URL`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` ) VALUES 
+	    <foreach collection="list" item="item" index="index" separator=",">
+	        (#{item.status},#{item.category},#{item.content},#{item.summary},#{item.shortUrl},#{item.createTime},#{item.creator},#{item.updateTime},#{item.updator})
+	    </foreach>
+    </insert>
+    
+    <delete id="delete" parameterType="long">
+    	DELETE FROM `PUSH` WHERE `ID` = #{id};
+    </delete>
+    
+    <delete id="deleteBatch">
+    	DELETE FROM `PUSH` WHERE `ID` IN 
+    	<foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+    		#{item}
+    	</foreach>
+    </delete>
+    
+    <update id="update" parameterType="com.sklay.bean.Push">
+    	UPDATE `PUSH` SET `STATUS`=#{status},`CATEGORY`=#{category},`CONTENT`=#{content},`SUMMARY`=#{summary},`SHORT_URL`=#{shortUrl},`CREATE_TIME`=#{createTime},`CREATOR`=#{creator},`UPDATE_TIME`=#{updateTime},`UPDATOR`=#{updator} WHERE `ID` = #{id}
+    </update>
+    
+    <update id="updateBatch">
+    	
+    </update>
+</mapper>
+

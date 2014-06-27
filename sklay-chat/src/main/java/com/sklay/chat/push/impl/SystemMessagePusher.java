@@ -1,4 +1,4 @@
-package com.sklay.chat.push;
+package com.sklay.chat.push.impl;
 
 import org.springframework.stereotype.Component;
 

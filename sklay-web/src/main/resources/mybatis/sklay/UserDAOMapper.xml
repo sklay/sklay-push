@@ -3,28 +3,44 @@
 <mapper namespace="com.sklay.dao.UserDAO">
 	<resultMap type="com.sklay.bean.User" id="userResult">
 		<id property="id" column="ID" javaType="long" />
-		<result property="username" column="USERNAME" javaType="String"/>
+		<result property="userName" column="USER_NAME" javaType="String"/>
 		<result property="password" column="PASSWORD" javaType="String"/>
-		<result property="nickname" column="NICKNAME" javaType="String"/>
+		<result property="userType" column="USER_TYPE" javaType="int"/>
+		<result property="name" column="NAME" javaType="String"/>
+		<result property="gender" column="GENDER" javaType="int"/>
+		<result property="image" column="IMAGE" javaType="String"/>
+		<result property="birthday" column="BIRTHDAY" javaType="Date"/>
 		<result property="phone" column="PHONE" javaType="String"/>
-		<result property="createtime" column="CREATETIME" javaType="Date"/>
-		<result property="updatetime" column="UPDATETIME" javaType="Date"/>
+		<result property="qq" column="QQ" javaType="String"/>
+		<result property="qqToken" column="QQ_TOKEN" javaType="String"/>
+		<result property="email" column="EMAIL" javaType="String"/>
+		<result property="msn" column="MSN" javaType="String"/>
+		<result property="weibo" column="WEIBO" javaType="String"/>
+		<result property="weiboToken" column="WEIBO_TOKEN" javaType="String"/>
+		<result property="weixin" column="WEIXIN" javaType="String"/>
+		<result property="souhuToken" column="SOUHU_TOKEN" javaType="String"/>
+		<result property="tel" column="TEL" javaType="String"/>
+		<result property="province" column="PROVINCE" javaType="long"/>
+		<result property="city" column="CITY" javaType="long"/>
+		<result property="area" column="AREA" javaType="long"/>
+		<result property="address" column="ADDRESS" javaType="int"/>
+		<result property="status" column="STATUS" javaType="int"/>
+		<result property="createTime" column="CREATE_TIME" javaType="Date"/>
+		<result property="creator" column="CREATOR" javaType="String"/>
+		<result property="updateTime" column="UPDATE_TIME" javaType="Date"/>
+		<result property="updator" column="UPDATOR" javaType="String"/>
 	</resultMap>
 	
 	<select id="query" resultMap="userResult">
-		SELECT `ID`,`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` FROM `USER`;
+		SELECT `ID`,`USER_NAME`,`PASSWORD`,`USER_TYPE`,`NAME`,`GENDER`,`IMAGE`,`BIRTHDAY`,`PHONE`,`QQ`,`QQ_TOKEN`,`EMAIL`,`MSN`,`WEIBO`,`WEIBO_TOKEN`,`WEIXIN`,`SOUHU_TOKEN`,`TEL`,`PROVINCE`,`CITY`,`AREA`,`ADDRESS`,`STATUS`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `USER`;
 	</select>
 	
     <select id="queryById" resultMap="userResult" parameterType="long">
-        SELECT `ID`,`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` FROM `USER` WHERE ID = #{id};
-    </select>
-    
-    <select id="queryByUsername" resultMap="userResult" parameterType="String">
-        SELECT `ID`,`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` FROM `USER` WHERE USERNAME = #{username};
+        SELECT `ID`,`USER_NAME`,`PASSWORD`,`USER_TYPE`,`NAME`,`GENDER`,`IMAGE`,`BIRTHDAY`,`PHONE`,`QQ`,`QQ_TOKEN`,`EMAIL`,`MSN`,`WEIBO`,`WEIBO_TOKEN`,`WEIXIN`,`SOUHU_TOKEN`,`TEL`,`PROVINCE`,`CITY`,`AREA`,`ADDRESS`,`STATUS`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `USER` WHERE ID = #{id};
     </select>
     
     <select id="queryByCondition" resultMap="userResult" >
-    	SELECT `ID`,`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` FROM `USER` WHERE 1=1 
+    	SELECT `ID`,`USER_NAME`,`PASSWORD`,`USER_TYPE`,`NAME`,`GENDER`,`IMAGE`,`BIRTHDAY`,`PHONE`,`QQ`,`QQ_TOKEN`,`EMAIL`,`MSN`,`WEIBO`,`WEIBO_TOKEN`,`WEIXIN`,`SOUHU_TOKEN`,`TEL`,`PROVINCE`,`CITY`,`AREA`,`ADDRESS`,`STATUS`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` FROM `USER` WHERE 1=1 
     	<if test="_CONDITION != null and _CONDITION != ''">
     	${_CONDITION} 
     	</if>
@@ -47,13 +63,13 @@
 		<selectKey resultType="long" keyProperty="id">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-    	INSERT INTO `USER`(`USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME`) VALUES (#{username},#{password},#{nickname},#{phone},#{createtime},#{updatetime});
+    	INSERT INTO `USER`(`USER_NAME`,`PASSWORD`,`USER_TYPE`,`NAME`,`GENDER`,`IMAGE`,`BIRTHDAY`,`PHONE`,`QQ`,`QQ_TOKEN`,`EMAIL`,`MSN`,`WEIBO`,`WEIBO_TOKEN`,`WEIXIN`,`SOUHU_TOKEN`,`TEL`,`PROVINCE`,`CITY`,`AREA`,`ADDRESS`,`STATUS`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR`) VALUES (#{userName},#{password},#{userType},#{name},#{gender},#{image},#{birthday},#{phone},#{qq},#{qqToken},#{email},#{msn},#{weibo},#{weiboToken},#{weixin},#{souhuToken},#{tel},#{province},#{city},#{area},#{address},#{status},#{createTime},#{creator},#{updateTime},#{updator});
     </insert>
     
     <insert id="insertBatch">
-    	INSERT INTO `USER` ( `USERNAME`,`PASSWORD`,`NICKNAME`,`PHONE`,`CREATETIME`,`UPDATETIME` ) VALUES 
+    	INSERT INTO `USER` ( `USER_NAME`,`PASSWORD`,`USER_TYPE`,`NAME`,`GENDER`,`IMAGE`,`BIRTHDAY`,`PHONE`,`QQ`,`QQ_TOKEN`,`EMAIL`,`MSN`,`WEIBO`,`WEIBO_TOKEN`,`WEIXIN`,`SOUHU_TOKEN`,`TEL`,`PROVINCE`,`CITY`,`AREA`,`ADDRESS`,`STATUS`,`CREATE_TIME`,`CREATOR`,`UPDATE_TIME`,`UPDATOR` ) VALUES 
 	    <foreach collection="list" item="item" index="index" separator=",">
-	        (#{item.username},#{item.password},#{item.nickname},#{item.phone},#{item.createtime},#{item.updatetime})
+	        (#{item.userName},#{item.password},#{item.userType},#{item.name},#{item.gender},#{item.image},#{item.birthday},#{item.phone},#{item.qq},#{item.qqToken},#{item.email},#{item.msn},#{item.weibo},#{item.weiboToken},#{item.weixin},#{item.souhuToken},#{item.tel},#{item.province},#{item.city},#{item.area},#{item.address},#{item.status},#{item.createTime},#{item.creator},#{item.updateTime},#{item.updator})
 	    </foreach>
     </insert>
     
@@ -69,7 +85,7 @@
     </delete>
     
     <update id="update" parameterType="com.sklay.bean.User">
-    	UPDATE `USER` SET `USERNAME`=#{username},`PASSWORD`=#{password},`NICKNAME`=#{nickname},`PHONE`=#{phone},`CREATETIME`=#{createtime},`UPDATETIME`=#{updatetime} WHERE `ID` = #{id}
+    	UPDATE `USER` SET `USER_NAME`=#{userName},`PASSWORD`=#{password},`USER_TYPE`=#{userType},`NAME`=#{name},`GENDER`=#{gender},`IMAGE`=#{image},`BIRTHDAY`=#{birthday},`PHONE`=#{phone},`QQ`=#{qq},`QQ_TOKEN`=#{qqToken},`EMAIL`=#{email},`MSN`=#{msn},`WEIBO`=#{weibo},`WEIBO_TOKEN`=#{weiboToken},`WEIXIN`=#{weixin},`SOUHU_TOKEN`=#{souhuToken},`TEL`=#{tel},`PROVINCE`=#{province},`CITY`=#{city},`AREA`=#{area},`ADDRESS`=#{address},`STATUS`=#{status},`CREATE_TIME`=#{createTime},`CREATOR`=#{creator},`UPDATE_TIME`=#{updateTime},`UPDATOR`=#{updator} WHERE `ID` = #{id}
     </update>
     
     <update id="updateBatch">

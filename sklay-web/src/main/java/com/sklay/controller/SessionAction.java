@@ -22,14 +22,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sklay.chat.push.SystemMessagePusher;
+import com.sklay.chat.push.impl.SystemMessagePusher;
 import com.sklay.core.chat.nio.constant.CIMConstant;
 import com.sklay.core.chat.nio.filter.ClientMessageCodecFactory;
 import com.sklay.core.chat.nio.mutual.ClientData;
 import com.sklay.core.chat.nio.mutual.Message;
 import com.sklay.core.chat.nio.mutual.ServerData;
 import com.sklay.core.chat.nio.session.CIMSession;
-import com.sklay.core.chat.nio.session.DefaultSessionManager;
+import com.sklay.core.chat.nio.session.impl.DefaultSessionManager;
 
 @Controller
 @RequestMapping("/admin")

@@ -1,4 +1,4 @@
-package com.sklay.chat.push;
+package com.sklay.chat.push.impl;
 
 import java.util.List;
 
@@ -9,9 +9,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
+import com.sklay.chat.push.CIMMessagePusher;
 import com.sklay.core.chat.nio.mutual.Message;
 import com.sklay.core.chat.nio.session.CIMSession;
-import com.sklay.core.chat.nio.session.DefaultSessionManager;
+import com.sklay.core.chat.nio.session.impl.DefaultSessionManager;
 
 /**
  * 消息发送实现类

@@ -32,7 +32,7 @@
 					<bean class="com.sklay.chat.handler.BindHandler">
 						<property name="sessionManager" ref="defaultSessionManager" />
 						<property name="sessionTemplate" ref="sqlSessionTemplate" />
-						<property name="queryMethod" value="com.sklay.dao.UserDAO.queryByUsername" />
+						<property name="queryMethod" value="com.sklay.dao.UserDAO.queryByCondition" />
 						<property name="addMethod" value="com.sklay.dao.UserDAO.insert"></property>
 						<property name="entityClass" value="com.sklay.bean.User" />
 						<property name="usernameField" value="username" />
@@ -92,7 +92,7 @@
 	</bean>
 
 	<!-- 这里可以自行实现com.sklay.core.chat.nio.session.SessionManager接口，实现自己的session管理器 -->
-	<bean id="defaultSessionManager" class="com.sklay.core.chat.nio.session.DefaultSessionManager">
+	<bean id="defaultSessionManager" class="com.sklay.core.chat.nio.session.impl.DefaultSessionManager">
 		<property name="cacheKey" value="mina-cahe-key" />
 		<property name="cacheSessionKey" value="mina-session-key" />
 		<property name="cacheManager" ref="shiroCacheManager" />

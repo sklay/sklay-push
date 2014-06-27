@@ -10,11 +10,8 @@ import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sklay.chat.push.impl.SystemMessagePusher;
 import com.sklay.core.chat.nio.mutual.Message;
-import com.sklay.chat.push.SystemMessagePusher;
-//import com.google.gson.Gson;
-//import com.opensymphony.xwork2.ActionSupport;
-//import com.opensymphony.xwork2.ModelDriven;
 
 /**
  * 

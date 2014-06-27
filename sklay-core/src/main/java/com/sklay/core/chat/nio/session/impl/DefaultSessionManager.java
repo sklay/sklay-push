@@ -1,4 +1,4 @@
-package com.sklay.core.chat.nio.session;
+package com.sklay.core.chat.nio.session.impl;
 
 import java.util.Collection;
 import java.util.Deque;
@@ -16,6 +16,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.sklay.core.chat.nio.constant.CIMConstant;
 import com.sklay.core.chat.nio.mutual.Message;
+import com.sklay.core.chat.nio.session.CIMSession;
+import com.sklay.core.chat.nio.session.SessionManager;
 
 /**
  * 自带默认 session管理实现， 各位可以自行实现 AbstractSessionManager接口来实现自己的 session管理

@@ -26,6 +26,11 @@ public class ClientData implements Serializable
     private String account;
     
     /**
+     * 账户密码
+     */
+    private String password;
+    
+    /**
      * 设备编号
      */
     private String deviceId;
@@ -130,6 +135,16 @@ public class ClientData implements Serializable
     public void setDevice(String device)
     {
         this.device = device;
+    }
+    
+    public String getPassword()
+    {
+        return password;
+    }
+    
+    public void setPassword(String password)
+    {
+        this.password = password;
     }
     
     /*

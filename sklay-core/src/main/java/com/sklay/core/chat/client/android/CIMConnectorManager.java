@@ -315,11 +315,13 @@ class CIMConnectorManager
             }
             if (obj instanceof ServerData)
             {
+                System.out.println("in serverData");
                 
                 Intent intent = new Intent();
                 intent.setAction(ACTION_REPLY_RECEIVED);
                 intent.putExtra("replyBody", (ServerData)obj);
                 context.sendBroadcast(intent);
+                
             }
         }
         

@@ -13,6 +13,10 @@ class CIMDataConfig
     
     public static String KEY_ACCOUNT = "KEY_ACCOUNT";
     
+    public static String KEY_PASSWORD = "KEY_PASSWORD";
+    
+    public static String KEY_LOGIN_TYPE = "KEY_LOGIN_TYPE";
+    
     public static String KEY_MANUAL_STOP = "KEY_MANUAL_STOP";
     
     public static String KEY_CIM_DESTORYED = "KEY_CIM_DESTORYED";
